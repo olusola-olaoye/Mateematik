@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+
+Written by olusola olaoye
+
+*/
+
+using UnityEngine;
 
 namespace Mateematik
 {
