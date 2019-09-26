@@ -23,7 +23,7 @@ namespace Mateematik
             this.A = A;
             this.B = B;
             this.type = type;
-            
+
             V = B - A;
         }
 
@@ -38,16 +38,12 @@ namespace Mateematik
 
         public Vector lerp(float t)
         {
-            t = type == LineType.Segment ? Mateematik.clamp(t, 0, 1) : type == LineType.Ray ? Mateematik.clamp(t, 0, Mathf.Infinity)
-                  : Mateematik.clamp(t, -Mathf.Infinity, Mathf.Infinity);
+            t = type == LineType.Segment ? MainMath.clamp(t, 0, 1) : type == LineType.Ray ? MainMath.clamp(t, 0, Mathf.Infinity)
+                  : MainMath.clamp(t, -Mathf.Infinity, Mathf.Infinity);
 
-            return ( (A + V) * t);
+            return ((A + V) * t);
         }
 
-        public void drawLine(float width, Color color)
-        {
-            Vector.drawLine(A,B,width,color);
-        }
 
         public Vector toVector()
         {
@@ -56,7 +52,7 @@ namespace Mateematik
 
         public float intersectAt(Line other)
         {
-            if (Mateematik.dotProduct(Vector.pepedincular(other.V), V) == 0 )
+            if (MainMath.dotProduct(Vector.pepedincular(other.V), V) == 0)
                 return float.NaN;
 
             float time; // t is a point in this line where other intersects at
@@ -67,7 +63,7 @@ namespace Mateematik
             Vector this_line_pepedincular = Vector.pepedincular(this_line);
             Vector other_line_pepedincular = Vector.pepedincular(other_line);
 
-            time = Mateematik.dotProduct(other_line_pepedincular , (other.A - this.A) ) / Mateematik.dotProduct(other_line_pepedincular , this_line);
+            time = MainMath.dotProduct(other_line_pepedincular, (other.A - this.A)) / MainMath.dotProduct(other_line_pepedincular, this_line);
 
             if ((time < 0 || time > 1) && type == LineType.Segment) return float.NaN;
 
@@ -76,7 +72,7 @@ namespace Mateematik
 
         public bool doesLineIntersect(Line other)
         {
-            if (Mateematik.dotProduct(Vector.pepedincular(other.V), V) == 0)
+            if (MainMath.dotProduct(Vector.pepedincular(other.V), V) == 0)
                 return false;
 
             float time; // t is a point in this line where other intersects at
@@ -87,7 +83,7 @@ namespace Mateematik
             Vector this_line_pepedincular = Vector.pepedincular(this_line);
             Vector other_line_pepedincular = Vector.pepedincular(other_line);
 
-            time = Mateematik.dotProduct(other_line_pepedincular, (other.A - this.A)) / Mateematik.dotProduct(other_line_pepedincular, this_line);
+            time = MainMath.dotProduct(other_line_pepedincular, (other.A - this.A)) / MainMath.dotProduct(other_line_pepedincular, this_line);
 
             if ((time < 0 || time > 1) && type == LineType.Segment) return false;
 

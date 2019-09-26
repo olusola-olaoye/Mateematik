@@ -205,6 +205,16 @@ namespace Mateematik
             return copy;
         }
 
-       
+        public static Vector orbit(Vector subject_position, Vector object_position, float speed, float distance, float angle)
+        {
+            angle *= speed;
+
+            subject_position = (new Vector(Mathf.Cos(angle) * distance, 0,
+                Mathf.Sin(angle) * distance) + object_position);
+
+
+            return subject_position;
+        }
+
     }
 }
